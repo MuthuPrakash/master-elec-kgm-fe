@@ -5,7 +5,8 @@ const columns = [
   {
     name: 'Book Id',
     selector: 'bookid',
-    sortable: true
+    sortable: true,
+    center: true
   }];
 
 class SearchTable extends Component {
@@ -21,6 +22,9 @@ class SearchTable extends Component {
         defaultSortField={"Book Id"}
         defaultSortAsc={false}
         center={true}
+        pagination={true}
+        paginationPerPage={50}
+        paginationRowsPerPageOptions={[50, 100, 200]}
       />
     )
   }

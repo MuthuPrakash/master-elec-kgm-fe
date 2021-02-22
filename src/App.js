@@ -45,7 +45,9 @@ class App extends Component {
     onAddClick = function (id, sysid, isreturn, returnid, booktype) {
         var bookItem;
         console.log('onAddClick inside app.js');
-        console.log('id', id, 'sysid', sysid, 'isreturn', isreturn, 'returnid', returnid, 'booktype', booktype)
+        console.log('id: ', id);
+        var bn = Math.ceil(id/50);
+        console.log('id', id, 'sysid', sysid, 'isreturn', isreturn, 'returnid', returnid, 'booktype', booktype, 'booknumber calculated', bn)
         let updated = false;
         console.log('isreturn ' + isreturn);
         if (!id) {
@@ -54,6 +56,7 @@ class App extends Component {
         }
 
         bookItem = JSON.stringify({
+            booknumber: bn,
             booktype: booktype,
             bookid: id,
             sysid: sysid,

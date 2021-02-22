@@ -3,9 +3,13 @@ import DataTable from 'react-data-table-component';
 
 const columns = [
     {
-        name: 'Book Type',
-        selector: 'booktype',
+        name: 'Book Number',
+        selector: 'booknumber',
         sortable: true
+    },
+    {
+        name: 'Book Type',
+        selector: 'booktype'
     },
     {
         name: 'Book Id',
@@ -42,6 +46,7 @@ class Table extends Component {
                     defaultSortAsc={true}
                     pagination={true}
                     paginationPerPage={50}
+                    paginationRowsPerPageOptions={[50, 100, 200]}
                 />
             </div>);
     }

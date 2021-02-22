@@ -8,6 +8,7 @@ class Input extends Component {
     constructor() {
         super();
         this.state = {
+            booknumber: '',
             booktype: 'A',
             id: '',
             sysid: '',
@@ -64,6 +65,13 @@ class Input extends Component {
                                     }}>Login</Button>
                                 </Form.Group>
 
+                                <Form.Group controlId="formBookNumber" className='displayNone'>
+                                    <Form.Label>Book Number</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter Book Number" onChange={(e) => {
+                                        console.log('book number value change: ', e.target.value)
+                                        this.updateValue('booknumber', e.target.value)
+                                    }} />
+                                </Form.Group>
                                 <Form.Group controlId="formBookType" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Book Type</Form.Label>
                                     <Form.Control as="select" onChange={(e) => {
