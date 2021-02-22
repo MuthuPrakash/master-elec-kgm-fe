@@ -65,23 +65,7 @@ class App extends Component {
         console.log('bookItem value - JSON stringify: ', JSON.stringify(bookItem));
         console.log('bookItem value - JSON stringify: ', JSON.parse(bookItem));
 
-        const result = this.state.names.map((nameData) => {
-            console.log('nameData.id: ', nameData.id, '=== id: ', id);
-            if (nameData.bookid === id) {
-                updated = true;
-                return bookItem;
-            }
-            return nameData;
-        });
-        console.log('updated bool: ', updated)
-        if (!updated) {
-            result.push(JSON.parse(bookItem));
-        }
-        console.log('result: ', JSON.stringify(result));
-        this.setState({
-            names: result
-        })
-        console.log('this.state.names: ', this.state.names);
+
 
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.post(`https://master-electricals.herokuapp.com/api/items`, bookItem, {
@@ -94,8 +78,29 @@ class App extends Component {
             console.log('res: ', res);
             console.log('Saved successfully in post access');
             console.log(bookItem);
+
+            const result = this.state.names.map((nameData) => {
+                console.log('nameData.id: ', nameData.id, '=== id: ', id);
+                if (nameData.bookid === id) {
+                    updated = true;
+                    return bookItem;
+                }
+                return nameData;
+            });
+            console.log('updated bool: ', updated)
+            if (!updated) {
+                result.push(JSON.parse(bookItem));
+            }
+            console.log('result: ', JSON.stringify(result));
+            this.setState({
+                names: result
+            })
+            console.log('this.state.names: ', this.state.names);
+            console.log('Saved successfully in post access');
+            alert('Success! Bill Added or Updated.');
         }).catch(function (error) {
             console.log('error in post')
+            alert('Error! Please Add the bill again.');
             if (error.response) {
                 console.log('error in post - Request made and server responded')// Request made and server responded
                 console.log(error.response.data);
