@@ -39,12 +39,12 @@ class App extends Component {
         })
     }
 
-    onAddClick = function (id, computernumber, isreturn, returnid, booktype, returnnotes, iscancel, cancelnotes) {
+    onAddClick = function (id, sysid, isreturn, returnid, booktype, returnnotes, iscancel, cancelnotes) {
         var bookItem;
         console.log('onAddClick inside app.js');
         console.log('id: ', id);
         var bn = Math.ceil(id/50);
-        console.log('id', id, 'computernumber', computernumber, 'isreturn', isreturn, 'returnid', returnid, 'booktype', booktype, 'booknumber calculated', bn, 'returnnotes: ', returnnotes, 'iscancel: ', iscancel, 'cancelnotes: ', cancelnotes)
+        console.log('id', id, 'sysid', sysid, 'isreturn', isreturn, 'returnid', returnid, 'booktype', booktype, 'booknumber calculated', bn, 'returnnotes: ', returnnotes, 'iscancel: ', iscancel, 'cancelnotes: ', cancelnotes)
         let updated = false;
         console.log('isreturn ' + isreturn);
         if (!id) {
@@ -56,7 +56,7 @@ class App extends Component {
             booknumber: bn,
             booktype: booktype,
             bookid: id,
-            computernumber: computernumber,
+            sysid: sysid,
             return: isreturn,
             returnid: returnid,
             returnnotes: returnnotes,
@@ -122,8 +122,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Input onAddClick={(id, computernumber, isreturn, returnid, type, returnnotes, iscancel, cancelnotes) => {
-                    this.onAddClick(id, computernumber, isreturn, returnid, type, returnnotes, iscancel, cancelnotes);
+                <Input onAddClick={(id, sysid, isreturn, returnid, type, returnnotes, iscancel, cancelnotes) => {
+                    this.onAddClick(id, sysid, isreturn, returnid, type, returnnotes, iscancel, cancelnotes);
                 }} />
                 <div className="alignRight">
                     <Button variant="secondary" type="submit" onClick={(e) => {

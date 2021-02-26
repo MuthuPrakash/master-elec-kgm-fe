@@ -12,7 +12,7 @@ class Input extends Component {
             booknumber: '',
             booktype: 'A',
             id: '',
-            computernumber: '',
+            sysid: '',
             isreturn: 0,
             returnid: '',
             returnnotes: '',
@@ -32,7 +32,7 @@ class Input extends Component {
     onAddClick(e) {
         e.preventDefault();
         console.log('this.onAddClick method call inside');
-        this.props.onAddClick(parseInt(this.state.id, 10), parseInt(this.state.computernumber, 10), this.state.isreturn, (this.state.returnid === "" || this.state.returnid === String.empty) ? "" : this.state.returnid, this.state.booktype, this.state.returnnotes, this.state.iscancel, this.state.cancelnotes);
+        this.props.onAddClick(parseInt(this.state.id, 10), parseInt(this.state.sysid, 10), this.state.isreturn, (this.state.returnid === "" || this.state.returnid === String.empty) ? "" : this.state.returnid, this.state.booktype, this.state.returnnotes, this.state.iscancel, this.state.cancelnotes);
         ReactDOM.findDOMNode(this.messageForm).reset();
     }
 
@@ -143,11 +143,11 @@ class Input extends Component {
 
                                 
 
-                                <Form.Group controlId="formcomputernumber" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
+                                <Form.Group controlId="formsysid" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Computer No</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Computer No" onChange={(e) => {
-                                        console.log('computer value change: ', e.target.value)
-                                        this.updateValue('computernumber', e.target.value)
+                                        console.log('computer no / sys id value change: ', e.target.value)
+                                        this.updateValue('sysid', e.target.value)
                                     }} />
                                 </Form.Group>
                                 <br/>

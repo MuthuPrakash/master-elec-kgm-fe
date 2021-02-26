@@ -18,7 +18,7 @@ const columns = [
     },
     {
         name: 'Sys Id',
-        selector: 'computernumber'
+        selector: 'sysid'
     },
     {
         name: 'Is Return',
