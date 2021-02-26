@@ -18,15 +18,28 @@ const columns = [
     },
     {
         name: 'Sys Id',
-        selector: 'sysid'
+        selector: 'computernumber'
     },
     {
         name: 'Is Return',
-        selector: 'return'
+        selector: 'isreturn'
     },
     {
         name: 'Return Id',
         selector: 'returnid'
+    },
+    {
+        name: 'Return Notes',
+        selector: 'returnnotes'
+    },
+    {
+        name: 'Is Cancel',
+        selector: 'iscancel',
+        sortable: true
+    },
+    {
+        name: 'Cancel Notes',
+        selector: 'cancelnotes'
     }
 ];
 

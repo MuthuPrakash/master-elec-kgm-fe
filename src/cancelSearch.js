@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { Badge, Form, Button, Row, Container } from 'react-bootstrap';
-import SearchTable from './searchTable';
+import CancelSearchTable from './cancelSearchTable';
 import './index.css';
 
 
-class Search extends Component {
+class CancelSearch extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            fromValue: '',
-            toValue: '',
-            isReturn: 1,
+            isCancel: 1,
             filteredRecords: [],
             booknumber: '1'
         }
@@ -54,9 +52,6 @@ class Search extends Component {
             }
         }
 
-        // alert('filteredRows: ', filteredRows.length);
-        // console.log('filteredRows: ', filteredRows.length)
-
         this.setState({
             filteredRecords: filteredRows
         });
@@ -68,7 +63,7 @@ class Search extends Component {
                 <div className="app-input">
                     <div>
                         <h2>
-                            Missing Sheets<Badge variant="secondary"></Badge>
+                            Cancelled Sheets<Badge variant="secondary"></Badge>
                         </h2>
                     </div>
                     <div>
@@ -221,19 +216,7 @@ class Search extends Component {
 
                                         </Form.Control>
                                     </Form.Group>
-                                    <Form.Group className='displayNone'>
-                                        <Form.Label>From</Form.Label>
-                                        <Form.Control type="text" placeholder="Enter From Value" onChange={(e) => {
-                                            this.updateValue('fromValue', e.target.value)
-                                        }} />
-                                    </Form.Group>
-                                    <Form.Group className='displayNone'>
-                                        <Form.Label>To</Form.Label>
-                                        <Form.Control type="text" placeholder="Enter To Value" onChange={(e) => {
-                                            this.updateValue('toValue', e.target.value)
-                                        }} />
-                                    </Form.Group>
-                                    <Button variant="success" type="submit" onClick={(e) => {
+                                    <Button variant="warning" type="submit" onClick={(e) => {
                                         this.onApplySearch(e)
                                     }}>Search</Button>
                                 </Form>
@@ -242,7 +225,7 @@ class Search extends Component {
                     </div>
                 </div>
                 <div>
-                    <SearchTable names={this.state.filteredRecords} />
+                    <CancelSearchTable names={this.state.filteredRecords} />
                 </div>
             </div>
         );
@@ -250,5 +233,5 @@ class Search extends Component {
 }
 
 
-export default Search;
+export default CancelSearch;
 

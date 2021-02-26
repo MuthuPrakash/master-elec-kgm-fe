@@ -4,16 +4,13 @@ import axios from 'axios'
 import Input from './Input';
 import Table from './Table';
 import Search from './search';
+import CancelSearch from './cancelSearch';
+import ColoredLine from './HorizontalLine';
 import './index.css';
 
 class App extends Component {
     constructor(props) {
         super(props);
-        // var itemsList = [{ id: 1, sysid: 14626, isreturn: 0, returnid: "" },
-        // { id: 2, sysid: 14627, isreturn: 0, returnid: "" }];
-        // this.state = {
-        //     names: itemsList
-        // };
 
         this.state = {
             names: []
@@ -42,12 +39,12 @@ class App extends Component {
         })
     }
 
-    onAddClick = function (id, sysid, isreturn, returnid, booktype) {
+    onAddClick = function (id, computernumber, isreturn, returnid, booktype, returnnotes, iscancel, cancelnotes) {
         var bookItem;
         console.log('onAddClick inside app.js');
         console.log('id: ', id);
         var bn = Math.ceil(id/50);
-        console.log('id', id, 'sysid', sysid, 'isreturn', isreturn, 'returnid', returnid, 'booktype', booktype, 'booknumber calculated', bn)
+        console.log('id', id, 'computernumber', computernumber, 'isreturn', isreturn, 'returnid', returnid, 'booktype', booktype, 'booknumber calculated', bn, 'returnnotes: ', returnnotes, 'iscancel: ', iscancel, 'cancelnotes: ', cancelnotes)
         let updated = false;
         console.log('isreturn ' + isreturn);
         if (!id) {
@@ -59,9 +56,12 @@ class App extends Component {
             booknumber: bn,
             booktype: booktype,
             bookid: id,
-            sysid: sysid,
+            computernumber: computernumber,
             return: isreturn,
-            returnid: returnid
+            returnid: returnid,
+            returnnotes: returnnotes,
+            iscancel: iscancel,
+            cancelnotes: cancelnotes
         });
 
         console.log('bookitem value: ', bookItem)
@@ -122,8 +122,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Input onAddClick={(id, sysid, isreturn, returnid, type) => {
-                    this.onAddClick(id, sysid, isreturn, returnid, type);
+                <Input onAddClick={(id, computernumber, isreturn, returnid, type, returnnotes, iscancel, cancelnotes) => {
+                    this.onAddClick(id, computernumber, isreturn, returnid, type, returnnotes, iscancel, cancelnotes);
                 }} />
                 <div className="alignRight">
                     <Button variant="secondary" type="submit" onClick={(e) => {
@@ -133,7 +133,10 @@ class App extends Component {
                 </div>
 
                 <Table names={this.state.names} />
+                <ColoredLine color='red'></ColoredLine>
                 <Search names={this.state.names} />
+                <ColoredLine color='red'></ColoredLine>
+                {/* <CancelSearch names={this.state.names} /> */}
             </div>
         );
     }
