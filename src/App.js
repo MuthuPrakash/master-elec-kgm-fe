@@ -4,7 +4,8 @@ import axios from 'axios'
 import Input from './Input';
 import Table from './Table';
 import Search from './search';
-import CancelSearch from './cancelSearch';
+// import CancelSearch from './cancelSearch';
+import SheetInfoFinder from './sheetInfoFinder';
 import ColoredLine from './HorizontalLine';
 import './index.css';
 
@@ -137,6 +138,7 @@ class App extends Component {
                 <Search names={this.state.names} />
                 <ColoredLine color='red'></ColoredLine>
                 {/* <CancelSearch names={this.state.names} /> */}
+                <SheetInfoFinder names={this.state.names} />
             </div>
         );
     }

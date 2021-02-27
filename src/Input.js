@@ -47,7 +47,7 @@ class Input extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Form ref={ form => this.messageForm = form } className="alignCenter">
+                            <Form ref={form => this.messageForm = form} className="alignCenter">
                                 <Form.Group controlId="formAdminPin" className={!this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Admin PIN</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Admin PIN" onChange={(e) => {
@@ -111,7 +111,7 @@ class Input extends Component {
                                         <option value="Z">Z</option>
                                     </Form.Control>
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Form.Group controlId="formBookId" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>1 + 2 Sheet No</Form.Label>
                                     <Form.Control type="text" placeholder="Enter 1 + 2 Sheet No" onChange={(e) => {
@@ -119,7 +119,7 @@ class Input extends Component {
                                         this.updateValue('id', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <br/>
+                                <br />
 
                                 <Form.Group controlId="formIsCancel" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Is Cancel?</Form.Label>
@@ -131,7 +131,7 @@ class Input extends Component {
                                         <option value="1">Yes</option>
                                     </Form.Control>
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Form.Group controlId="formCancelNotes" className={this.state.iscancel ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Cancel Notes</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Cancel Notes" onChange={(e) => {
@@ -139,9 +139,9 @@ class Input extends Component {
                                         this.updateValue('cancelnotes', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <br/>
+                                <br />
 
-                                
+
 
                                 <Form.Group controlId="formsysid" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Computer No</Form.Label>
@@ -150,7 +150,7 @@ class Input extends Component {
                                         this.updateValue('sysid', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Form.Group controlId="formIsReturn" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Is Return?</Form.Label>
                                     <Form.Control as="select" onChange={(e) => {
@@ -161,7 +161,7 @@ class Input extends Component {
                                         <option value="1">Yes</option>
                                     </Form.Control>
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Form.Group controlId="formReturnId" className={this.state.isreturn ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Return No</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Return No" onChange={(e) => {
@@ -169,7 +169,7 @@ class Input extends Component {
                                         this.updateValue('returnid', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Form.Group controlId="formReturnNotes" className={this.state.isreturn ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Return Notes</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Return Notes" onChange={(e) => {
@@ -177,7 +177,7 @@ class Input extends Component {
                                         this.updateValue('returnnotes', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Button className={this.state.loginValidate ? 'displayBlock' : 'displayNone'} variant="info" type="submit" onClick={(e) => {
                                     e.preventDefault();
                                     console.log('loginValidate button click')
