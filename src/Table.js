@@ -12,12 +12,12 @@ const columns = [
         selector: 'booktype'
     },
     {
-        name: 'Book Id',
+        name: 'Sheet No',
         selector: 'bookid',
         sortable: true
     },
     {
-        name: 'Sys Id',
+        name: 'Computer No',
         selector: 'sysid'
     },
     {
@@ -25,7 +25,7 @@ const columns = [
         selector: 'isreturn'
     },
     {
-        name: 'Return Id',
+        name: 'Return No',
         selector: 'returnid'
     },
     {

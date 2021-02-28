@@ -6,6 +6,8 @@ body {
 
 .App {
     margin-left: 8px;
+    align-items: center;
+    text-align: center;
 }
 
 .app-input {

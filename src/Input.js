@@ -1,26 +1,36 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Badge, Form, Button, Row, Container } from 'react-bootstrap';
+import { Form, Button, Row, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 class Input extends Component {
 
+    initialState = {
+        booknumber: '',
+        booktype: 'A',
+        id: '',
+        sysid: '',
+        isreturn: 0,
+        returnid: '',
+        returnnotes: '',
+        iscancel: 0,
+        cancelnotes: ''
+    }
     constructor() {
         super();
+
         this.state = {
-            booknumber: '',
-            booktype: 'A',
-            id: '',
-            sysid: '',
-            isreturn: 0,
-            returnid: '',
-            returnnotes: '',
-            iscancel: 0,
-            cancelnotes: ''
+            ...this.initialState,
+            adminpin: 0,
+            loginValidate: false
         }
-        this.setState({ adminpin: 0 })
-        this.setState({ loginValidate: false })
+        // this.setState({ adminpin: 0 })
+        // this.setState({ loginValidate: false })
+    }
+
+    resetToInitialState = () => {
+        this.setState({...this.initialState});
     }
 
     updateValue(fieldName, value) {
@@ -31,8 +41,8 @@ class Input extends Component {
 
     onAddClick(e) {
         e.preventDefault();
-        console.log('this.onAddClick method call inside');
-        this.props.onAddClick(parseInt(this.state.id, 10), parseInt(this.state.sysid, 10), this.state.isreturn, (this.state.returnid === "" || this.state.returnid === String.empty) ? "" : this.state.returnid, this.state.booktype, this.state.returnnotes, this.state.iscancel, this.state.cancelnotes);
+        this.props.onAddClick(parseInt(this.state.id, 10), parseInt(this.state.sysid, 10), parseInt(this.state.isreturn, 10), (this.state.returnid === "" || this.state.returnid === String.empty) ? "" : this.state.returnid, this.state.booktype, this.state.returnnotes, parseInt(this.state.iscancel, 10), this.state.cancelnotes);
+        this.resetToInitialState();
         ReactDOM.findDOMNode(this.messageForm).reset();
     }
 
@@ -40,14 +50,9 @@ class Input extends Component {
         return (
             <div className="app-input">
                 <div>
-                    <h1>
-                        Master Electricals<Badge variant="secondary"></Badge>
-                    </h1>
-                </div>
-                <div>
                     <Container>
                         <Row>
-                            <Form ref={ form => this.messageForm = form } className="alignCenter">
+                            <Form ref={form => this.messageForm = form} className="alignCenter">
                                 <Form.Group controlId="formAdminPin" className={!this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Admin PIN</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Admin PIN" onChange={(e) => {
@@ -60,27 +65,22 @@ class Input extends Component {
                                 <Form.Group controlId="formButtonLogin">
                                     <Button className={!this.state.loginValidate ? 'displayBlock' : 'displayNone'} variant="info" type="submit" onClick={(e) => {
                                         e.preventDefault();
-                                        console.log('button click: ')
-                                        console.log('this.state.loginValidate: ', this.state.loginValidate)
-                                        var loginCheck = parseInt(this.state.adminpin, 10) === parseInt('9524444849', 10) ? true : false;
+                                        var loginCheck = parseInt(this.state.adminpin, 10) === parseInt('4767', 10) ? true : false;
                                         console.log('loginCheck: ', loginCheck);
                                         this.setState({ loginValidate: loginCheck });
                                         loginCheck ? alert('Login Success') : alert('Wrong Admin PIN. Login Failure')
-                                        console.log('this.state.loginvalidate: ', this.state.loginValidate)
                                     }}>Login</Button>
                                 </Form.Group>
 
                                 <Form.Group controlId="formBookNumber" className='displayNone'>
                                     <Form.Label>Book Number</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Book Number" onChange={(e) => {
-                                        console.log('book number value change: ', e.target.value)
                                         this.updateValue('booknumber', e.target.value)
                                     }} />
                                 </Form.Group>
                                 <Form.Group controlId="formBookType" className='displayNone'>
                                     <Form.Label>Book Type</Form.Label>
                                     <Form.Control as="select" onChange={(e) => {
-                                        console.log('booktype select value change: ', e.target.value)
                                         this.updateValue('booktype', e.target.value)
                                     }}>
                                         <option value="A">A</option>
@@ -111,77 +111,71 @@ class Input extends Component {
                                         <option value="Z">Z</option>
                                     </Form.Control>
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Form.Group controlId="formBookId" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>1 + 2 Sheet No</Form.Label>
                                     <Form.Control type="text" placeholder="Enter 1 + 2 Sheet No" onChange={(e) => {
-                                        console.log('bookid value change: ', e.target.value)
                                         this.updateValue('id', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <br/>
+                                <br />
 
                                 <Form.Group controlId="formIsCancel" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Is Cancel?</Form.Label>
                                     <Form.Control as="select" onChange={(e) => {
-                                        console.log('iscancel value change: ', e.target.value)
                                         this.updateValue('iscancel', e.target.value)
                                     }}>
                                         <option value="0">No</option>
                                         <option value="1">Yes</option>
                                     </Form.Control>
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Form.Group controlId="formCancelNotes" className={this.state.iscancel ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Cancel Notes</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Cancel Notes" onChange={(e) => {
-                                        console.log('cancelnotes value change: ', e.target.value)
                                         this.updateValue('cancelnotes', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <br/>
+                                <br />
 
-                                
+
 
                                 <Form.Group controlId="formsysid" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Computer No</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Computer No" onChange={(e) => {
-                                        console.log('computer no / sys id value change: ', e.target.value)
                                         this.updateValue('sysid', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Form.Group controlId="formIsReturn" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Is Return?</Form.Label>
                                     <Form.Control as="select" onChange={(e) => {
-                                        console.log('is return value change: ', e.target.value)
                                         this.updateValue('isreturn', e.target.value)
                                     }}>
                                         <option value="0">No</option>
                                         <option value="1">Yes</option>
                                     </Form.Control>
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Form.Group controlId="formReturnId" className={this.state.isreturn ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Return No</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Return No" onChange={(e) => {
-                                        console.log('returnid value change: ', e.target.value)
                                         this.updateValue('returnid', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Form.Group controlId="formReturnNotes" className={this.state.isreturn ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Return Notes</Form.Label>
                                     <Form.Control type="text" placeholder="Enter Return Notes" onChange={(e) => {
-                                        console.log('returnnotes value change: ', e.target.value)
                                         this.updateValue('returnnotes', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <br/>
+                                <br />
                                 <Button className={this.state.loginValidate ? 'displayBlock' : 'displayNone'} variant="info" type="submit" onClick={(e) => {
                                     e.preventDefault();
                                     console.log('loginValidate button click')
                                     this.onAddClick(e)
+                                    this.resetToInitialState();
                                 }}>Add</Button>
                             </Form>
                         </Row>

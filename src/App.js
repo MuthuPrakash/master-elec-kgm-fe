@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap'
+import { Button, Badge } from 'react-bootstrap'
 import axios from 'axios'
 import Input from './Input';
 import Table from './Table';
 import Search from './search';
-import CancelSearch from './cancelSearch';
+// import CancelSearch from './cancelSearch';
+import SheetInfoFinder from './sheetInfoFinder';
 import ColoredLine from './HorizontalLine';
 import './index.css';
 
@@ -17,7 +18,6 @@ class App extends Component {
         };
     }
     componentDidMount() {
-        console.log('App.js componentDidMount')
         this.getItems();
     }
 
@@ -31,8 +31,7 @@ class App extends Component {
             }, responseType: 'json', credentials: 'same-origin',
         }).then(res => {
             const billItems = res.data;
-            console.log("call success ")
-            console.log(JSON.stringify(billItems))
+            console.log("getItems call success ")
             this.setState({ names: billItems });
         }).catch(function (error) {
             console.log('Error in fetching the items: ', error);
@@ -46,7 +45,6 @@ class App extends Component {
         var bn = Math.ceil(id/50);
         console.log('id', id, 'sysid', sysid, 'isreturn', isreturn, 'returnid', returnid, 'booktype', booktype, 'booknumber calculated', bn, 'returnnotes: ', returnnotes, 'iscancel: ', iscancel, 'cancelnotes: ', cancelnotes)
         let updated = false;
-        console.log('isreturn ' + isreturn);
         if (!id) {
             console.log("invalid id value");
             return;
@@ -57,18 +55,12 @@ class App extends Component {
             booktype: booktype,
             bookid: id,
             sysid: sysid,
-            return: isreturn,
+            isreturn: isreturn,
             returnid: returnid,
             returnnotes: returnnotes,
             iscancel: iscancel,
             cancelnotes: cancelnotes
         });
-
-        console.log('bookitem value: ', bookItem)
-        console.log('bookItem value - JSON stringify: ', JSON.stringify(bookItem));
-        console.log('bookItem value - JSON stringify: ', JSON.parse(bookItem));
-
-
 
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.post(`https://master-electricals.herokuapp.com/api/items`, bookItem, {
@@ -94,11 +86,9 @@ class App extends Component {
             if (!updated) {
                 result.push(JSON.parse(bookItem));
             }
-            console.log('result: ', JSON.stringify(result));
             this.setState({
                 names: result
             })
-            console.log('this.state.names: ', this.state.names);
             console.log('Saved successfully in post access');
             alert('Success! Bill Added or Updated.');
         }).catch(function (error) {
@@ -122,6 +112,15 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <div>
+                    <h1>
+                        Master Electricals<Badge variant="secondary"></Badge>
+                    </h1>
+                </div>
+
+                <SheetInfoFinder names={this.state.names} />
+                <br/>
+                <ColoredLine color='red'></ColoredLine>
                 <Input onAddClick={(id, sysid, isreturn, returnid, type, returnnotes, iscancel, cancelnotes) => {
                     this.onAddClick(id, sysid, isreturn, returnid, type, returnnotes, iscancel, cancelnotes);
                 }} />
