@@ -60,10 +60,9 @@ class SheetInfoFinder extends Component {
                         <Container>
                             <Row>
                                 <Form>
-                                    <Form.Group className='displayNone'>
+                                    <Form.Group className=''>
                                         <Form.Label>Book Type</Form.Label>
                                         <Form.Control as="select" id="bookType" value={this.state.booktype} onChange={(e) => {
-                                            console.log('drop down value change: ', e.target.value)
                                             this.updateValue('booktype', e.target.value)
                                         }}>
                                             <option value="A">A</option>
@@ -94,7 +93,6 @@ class SheetInfoFinder extends Component {
                                             <option value="Z">Z</option>
                                         </Form.Control>
                                     </Form.Group>
-                                    <br />
                                     <Form.Group>
                                         <Form.Label>Sheet Number</Form.Label>
                                         <Form.Control type="text" placeholder="Enter Sheet Number" onChange={(e) => {
@@ -102,7 +100,7 @@ class SheetInfoFinder extends Component {
                                         }} />
                                     </Form.Group>
                                     <br />
-                                    <Button variant="info" type="submit" onClick={(e) => {
+                                    <Button variant="primary" type="submit" onClick={(e) => {
                                         this.onApplySearch(e)
                                     }}>Find</Button>
                                 </Form>
@@ -113,26 +111,30 @@ class SheetInfoFinder extends Component {
                 <div>
                     {/* <SearchTable names={this.state.filteredRecords} /> */}
                     <Form>
-                        <Form.Group className={this.state.filteredRecords[0].booktype != '' ? 'displayBlock' : 'displayNone'}>
-                            <Form.Label><h4>Book Type: {this.state.filteredRecords[0].booktype}</h4> <h5></h5> </Form.Label>
+                        <Form.Group className={this.state.filteredRecords.length > 0 ? 'displayNone' : 'displayBlock'}>
+                            <Form.Label><h4>{this.state.filteredRecords.length > 0 ? 'Item Exists' : 'No Record Found. Try with a different Sheet No'}</h4></Form.Label>
                         </Form.Group>
-                        <Form.Group className={this.state.filteredRecords[0].booknumber != '' ? 'displayBlock' : 'displayNone'}>
-                            <Form.Label><h4>Book No: {this.state.filteredRecords[0].booknumber}</h4> <h5></h5></Form.Label>
+
+                        <Form.Group className={this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].booktype != '' ? 'displayBlock' : 'displayNone'}>
+                            <Form.Label><h4>Book Type: {this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].booktype ? this.state.filteredRecords[0].booktype : ''}</h4> <h5></h5> </Form.Label>
                         </Form.Group>
-                        <Form.Group className={this.state.filteredRecords[0].bookid != '' ? 'displayBlock' : 'displayNone'}>
-                            <Form.Label><h4>Sheet No: {this.state.filteredRecords[0].bookid}</h4> <h5></h5></Form.Label>
+                        <Form.Group className={this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].booknumber != '' ? 'displayBlock' : 'displayNone'}>
+                            <Form.Label><h4>Book No: {this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].booknumber ? this.state.filteredRecords[0].booknumber : ''}</h4> <h5></h5></Form.Label>
                         </Form.Group>
-                        <Form.Group className={this.state.filteredRecords[0].sysid != '' ? 'displayBlock' : 'displayNone'}>
-                            <Form.Label><h4>Computer No: {this.state.filteredRecords[0].sysid}</h4> <h5></h5></Form.Label>
+                        <Form.Group className={this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].bookid != '' ? 'displayBlock' : 'displayNone'}>
+                            <Form.Label><h4>Sheet No: {this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].bookid ? this.state.filteredRecords[0].bookid : ''}</h4> <h5></h5></Form.Label>
                         </Form.Group>
-                        <Form.Group className={this.state.filteredRecords[0].returnid != '' ? 'displayBlock' : 'displayNone'}>
-                            <Form.Label><h4>Return No: {this.state.filteredRecords[0].returnid}</h4> <h5></h5></Form.Label>
+                        <Form.Group className={this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].sysid != '' ? 'displayBlock' : 'displayNone'}>
+                            <Form.Label><h4>Computer No: {this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].sysid ? this.state.filteredRecords[0].sysid : ''}</h4> <h5></h5></Form.Label>
                         </Form.Group>
-                        <Form.Group className={this.state.filteredRecords[0].returnnotes != '' ? 'displayBlock' : 'displayNone'}>
-                            <Form.Label><h4>Return Notes: {this.state.filteredRecords[0].returnnotes}</h4> <h5></h5></Form.Label>
+                        <Form.Group className={this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].returnid != '' ? 'displayBlock' : 'displayNone'}>
+                            <Form.Label><h4>Return No: {this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].returnid ? this.state.filteredRecords[0].returnid : ''}</h4> <h5></h5></Form.Label>
                         </Form.Group>
-                        <Form.Group className={this.state.filteredRecords[0].cancelnotes != '' ? 'displayBlock' : 'displayNone'}>
-                            <Form.Label><h4>Cancel Notes: {this.state.filteredRecords[0].cancelnotes}</h4> <h5></h5></Form.Label>
+                        <Form.Group className={this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].returnnotes != '' ? 'displayBlock' : 'displayNone'}>
+                            <Form.Label><h4>Return Notes: {this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].returnnotes ? this.state.filteredRecords[0].returnnotes : ''}</h4> <h5></h5></Form.Label>
+                        </Form.Group>
+                        <Form.Group className={this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].cancelnotes != '' ? 'displayBlock' : 'displayNone'}>
+                            <Form.Label><h4>Cancel Notes: {this.state.filteredRecords.length > 0 && this.state.filteredRecords[0].cancelnotes ? this.state.filteredRecords[0].cancelnotes : ''}</h4> <h5></h5></Form.Label>
                         </Form.Group>
 
                     </Form>

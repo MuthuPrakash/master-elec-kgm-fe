@@ -40,7 +40,6 @@ class Search extends Component {
         if (parseInt(fromValue, 10) > parseInt(toValue, 10)) {
             alert("from value should be less than the to value");
         }
-        // console.log("IsReturn Value " + this.state.isReturn)
         var filteredRows = [];
         for (var i = fromValue; i <= toValue; i++) {
             // eslint-disable-next-line
@@ -53,9 +52,6 @@ class Search extends Component {
                 })
             }
         }
-
-        // alert('filteredRows: ', filteredRows.length);
-        // console.log('filteredRows: ', filteredRows.length)
 
         this.setState({
             filteredRecords: filteredRows
@@ -78,7 +74,6 @@ class Search extends Component {
                                     <Form.Group className='displayNone'>
                                         <Form.Label>Book Type</Form.Label>
                                         <Form.Control as="select" id="bookType" value={this.state.booktype} onChange={(e) => {
-                                            console.log('drop down value change: ', e.target.value)
                                             this.updateValue('booktype', e.target.value)
                                         }}>
                                             <option value="A">A</option>
@@ -115,7 +110,6 @@ class Search extends Component {
                                     <Form.Group>
                                         <Form.Label>Book Number</Form.Label>
                                         <Form.Control as="select" id="booknumber" value={this.state.booknumber} onChange={(e) => {
-                                            console.log('drop down value change: ', e.target.value)
                                             this.updateValue('booknumber', e.target.value)
                                         }}>
                                             <option value="1">1</option>
