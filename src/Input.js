@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Form, Button, Row, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
@@ -29,8 +28,12 @@ class Input extends Component {
         // this.setState({ loginValidate: false })
     }
 
+    componentDidMount() {
+        this.loginText.focus();
+    }
+
     resetToInitialState = () => {
-        this.setState({...this.initialState});
+        this.setState({ ...this.initialState });
     }
 
     updateValue(fieldName, value) {
@@ -43,7 +46,17 @@ class Input extends Component {
         e.preventDefault();
         this.props.onAddClick(parseInt(this.state.id, 10), parseInt(this.state.sysid, 10), parseInt(this.state.isreturn, 10), (this.state.returnid === "" || this.state.returnid === String.empty) ? "" : this.state.returnid, this.state.booktype, this.state.returnnotes, parseInt(this.state.iscancel, 10), this.state.cancelnotes);
         this.resetToInitialState();
-        ReactDOM.findDOMNode(this.messageForm).reset();
+        this.sheetNumberText.value = "";
+        this.sheetNumberText.focus();
+    }
+
+    loginValidateCheck(e) {
+            e.preventDefault();
+            var loginCheck = parseInt(this.state.adminpin, 10) === parseInt('4767', 10) ? true : false;
+            console.log('loginCheck: ', loginCheck);
+            this.setState({ loginValidate: loginCheck });
+            loginCheck ? alert('Login Success') : alert('Wrong Admin PIN. Login Failure')
+            this.sheetNumberText.focus();
     }
 
     render() {
@@ -55,7 +68,7 @@ class Input extends Component {
                             <Form ref={form => this.messageForm = form} className="alignCenter">
                                 <Form.Group controlId="formAdminPin" className={!this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Admin PIN</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter Admin PIN" onChange={(e) => {
+                                    <Form.Control ref={loginText => this.loginText = loginText} type="text" placeholder="Enter Admin PIN" onChange={(e) => {
                                         console.log('Admin PIN value change: ', e.target.value)
 
                                         this.updateValue('adminpin', e.target.value)
@@ -63,13 +76,7 @@ class Input extends Component {
                                 </Form.Group>
 
                                 <Form.Group controlId="formButtonLogin">
-                                    <Button className={!this.state.loginValidate ? 'displayBlock' : 'displayNone'} variant="info" type="submit" onClick={(e) => {
-                                        e.preventDefault();
-                                        var loginCheck = parseInt(this.state.adminpin, 10) === parseInt('4767', 10) ? true : false;
-                                        console.log('loginCheck: ', loginCheck);
-                                        this.setState({ loginValidate: loginCheck });
-                                        loginCheck ? alert('Login Success') : alert('Wrong Admin PIN. Login Failure')
-                                    }}>Login</Button>
+                                    <Button className={!this.state.loginValidate ? 'displayBlock' : 'displayNone'} variant="info" type="submit" onClick={(e) => this.loginValidateCheck(e)}>Login</Button>
                                 </Form.Group>
 
                                 <Form.Group controlId="formBookNumber" className='displayNone'>
@@ -114,7 +121,7 @@ class Input extends Component {
                                 <br />
                                 <Form.Group controlId="formBookId" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>1 + 2 Sheet No</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter 1 + 2 Sheet No" onChange={(e) => {
+                                    <Form.Control ref={sheetNumberText => this.sheetNumberText = sheetNumberText} type="text" placeholder="Enter 1 + 2 Sheet No" onChange={(e) => {
                                         this.updateValue('id', e.target.value)
                                     }} />
                                 </Form.Group>
