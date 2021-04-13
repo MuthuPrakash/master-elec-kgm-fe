@@ -22,7 +22,6 @@ class App extends Component {
     }
 
     getItems = function () {
-        console.log('getItems function call');
         axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
         axios.get(`https://master-electricals.herokuapp.com/api/items`, {
             headers: {
@@ -31,16 +30,32 @@ class App extends Component {
             }, responseType: 'json', credentials: 'same-origin',
         }).then(res => {
             const billItems = res.data;
-            console.log("getItems call success ")
             this.setState({ names: billItems });
         }).catch(function (error) {
             console.log('Error in fetching the items: ', error);
         })
     }
 
+    validateItemExists = function (itemToValidate) {
+        var isItemExists = false;
+        this.state.names.forEach(element => {
+            if(element.bookid === itemToValidate){
+                isItemExists = true;
+                return isItemExists;
+            }
+        });
+        return isItemExists
+    }
+
     onAddClick = function (id, sysid, isreturn, returnid, booktype, returnnotes, iscancel, cancelnotes) {
+
+        var isBookIdExists = this.validateItemExists(id);
+        if(isBookIdExists){
+            alert('Sheet already exists! Contact Admin!');
+            return;
+        }
+
         var bookItem;
-        console.log('onAddClick inside app.js');
         console.log('id: ', id);
         var bn = Math.ceil(id/50);
         console.log('id', id, 'sysid', sysid, 'isreturn', isreturn, 'returnid', returnid, 'booktype', booktype, 'booknumber calculated', bn, 'returnnotes: ', returnnotes, 'iscancel: ', iscancel, 'cancelnotes: ', cancelnotes)
@@ -82,7 +97,6 @@ class App extends Component {
                 }
                 return nameData;
             });
-            console.log('updated bool: ', updated)
             if (!updated) {
                 result.push(JSON.parse(bookItem));
             }

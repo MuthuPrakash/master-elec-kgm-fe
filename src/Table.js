@@ -29,17 +29,21 @@ const columns = [
         selector: 'returnid'
     },
     {
-        name: 'Return Notes',
-        selector: 'returnnotes'
-    },
-    {
         name: 'Is Cancel',
         selector: 'iscancel',
         sortable: true
     },
     {
+        name: 'Return Notes',
+        selector: 'returnnotes',
+        width: '200px',
+        wrap: true
+    },
+    {
         name: 'Cancel Notes',
-        selector: 'cancelnotes'
+        selector: 'cancelnotes',
+        width: '200px',
+        wrap: true
     }
 ];
 

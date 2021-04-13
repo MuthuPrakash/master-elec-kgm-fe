@@ -141,6 +141,7 @@ class Search extends Component {
                                         <Form.Control as="select" id="booknumber" value={this.state.booknumber} onChange={(e) => {
                                             this.updateValue('booknumber', e.target.value)
                                         }}>
+                                            <option value='0'>Click to select!</option>
                                             {
                                                 this.fillDDValues()
                                             }
