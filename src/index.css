@@ -4,8 +4,11 @@ body {
     font-family: sans-serif;
 }
 
+header{
+    background: antiquewhite;
+}
+
 .App {
-    margin-left: 8px;
     align-items: center;
     text-align: center;
 }
@@ -52,3 +55,16 @@ body {
 .alignCenter {
     text-align: center;
 }
+
+li.Nav__item {padding: 5px;}
+
+div.additionRowCard{
+    flex: 1;
+    max-width: 100% !important;
+}
+
+div.productCard.container
+{
+    padding: 10px;
+}
+
