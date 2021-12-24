@@ -16,17 +16,17 @@
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "bootstrap-icons": "^1.7.1",
     "firebase-tools": "^9.4.0",
     "material-table": "^1.69.2",
     "mongodb": "^3.6.4",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
-    "bootstrap-icons": "^1.7.1",
-    "react-data-table-component": "^7.0.0-alpha-5",
+    "react-data-table-component": "7.0.0-alpha-5",
     "react-dom": "^17.0.1",
-    "styled-components": "^5.2.1",
+    "react-router-dom": "^5.2.0",
     "react-toastify": "^8.1.0",
-    "react-router-dom": "^5.2.0"
+    "styled-components": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
