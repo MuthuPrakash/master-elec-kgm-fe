@@ -4,13 +4,13 @@ import DataTable from 'react-data-table-component';
 const columns = [
   {
     name: 'Book Id',
-    selector: 'bookid',
+    selector: (row) => row.bookid,
     sortable: true,
     center: true
   },
   {
     name: 'Cancel Notes',
-    selector: 'cancelnotes',
+    selector: (row) => row.cancelnotes,
     sortable: true,
     center: true
   },

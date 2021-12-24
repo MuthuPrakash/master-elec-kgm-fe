@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Col, Card, Button, Badge, Form, Container, Modal} from 'react-bootstrap';
 import axios from 'axios'
+import config from './config.json';
 
 export default class Product extends Component{
 
@@ -8,7 +9,8 @@ export default class Product extends Component{
     {
         super(props);
         this.state={
-            showModal : false,             
+            showModal : false,
+            rentalId: Date.now(),             
             renteeName: "",
             renteeAddress: "",
             renteePhone: "",
@@ -41,20 +43,27 @@ export default class Product extends Component{
 
     assignProduct = () => {
 
-        var bookItem = JSON.stringify({
-            booknumber: "d",
-            booktype: "s",
-            bookid: 99585545,
-            sysid: 665665,
-            isreturn: 1,
-            returnid: 5884599,
-            returnnotes: "",
-            iscancel: 0,
-            cancelnotes: "cancelnotes"
-        });
+        var rentinfo=  {
+        "productId": this.props.info.productId,
+        "isUpdate": false,
+        "isReturned": false,
+        "renteeName": this.state.renteeName,
+        "rentalId": this.state.rentalId,
+        "fromDate": this.state.fromDate,
+        "pricePerDay": this.state.pricePerDay,
+        "renteeAddress": this.state.renteeAddress,
+        "renteePhone": this.state.renteePhone,
+        "renteeReferral": this.state.renteeReferral,
+        "returnNotes": "",
+        "toDate": null,
+        "productName": this.props.info.productName,
+        "availableQuantity": this.props.info.availableQuantity - this.state.quantity,
+        "quantity": this.state.quantity
+        };
+
 
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.post(`https://master-electricals.herokuapp.com/api/items`, bookItem, {
+        axios.post(config.apiHost + `/api/addInventoryRental`, rentinfo, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -63,11 +72,11 @@ export default class Product extends Component{
         }).then(res => {
             console.log('res: ', res);
             console.log('Saved successfully in post access');
-            console.log(bookItem);
-
-           
+            
+        
             console.log('Saved successfully in post access');
-            alert('Success! Bill Added or Updated.');
+            alert('Success! Rental Inventory Added.');
+            window.location = '/products';
         }).catch(function (error) {
             console.log('error in post')
             alert('Error! Please Add the bill again.');
@@ -85,56 +94,6 @@ export default class Product extends Component{
             }
         });
         
-
-        // var rentinfo=  {
-        // "productId": this.props.info.productId,
-        // "isUpdate": false,
-        // "isReturned": false,
-        // "renteeName": this.state.renteeName,
-        // "fromDate": this.state.fromDate,
-        // "pricePerDay": this.state.pricePerDay,
-        // "renteeAddress": this.state.renteeAddress,
-        // "renteePhone": this.state.renteePhone,
-        // "renteeReferral": this.state.renteeReferral,
-        // "returnNotes": "",
-        // "toDate": null,
-        // "productName": this.props.info.productName,
-        // "availableQuantity": this.props.info.availableQuantity - this.state.quantity,
-        // "quantity": this.state.quantity
-        // };
-
-
-        // axios.defaults.headers.post['Content-Type'] = 'application/json';
-        // axios.post(`https://master-electricals.herokuapp.com/api/addInventoryRental`, rentinfo, {
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json',
-        //     }
-        //     , responseType: 'json', credentials: 'same-origin',
-        // }).then(res => {
-        //     console.log('res: ', res);
-        //     console.log('Saved successfully in post access');
-            
-        
-        //     console.log('Saved successfully in post access');
-        //     alert('Success! Bill Added or Updated.');
-        // }).catch(function (error) {
-        //     console.log('error in post')
-        //     alert('Error! Please Add the bill again.');
-        //     if (error.response) {
-        //         console.log('error in post - Request made and server responded')// Request made and server responded
-        //         console.log(error.response.data);
-        //         console.log(error.response.status);
-        //         console.log(error.response.headers);
-        //     } else if (error.request) {
-        //         console.log('error in post - The request was made but no response was received')// The request was made but no response was received
-        //         console.log(error.request);
-        //     } else {
-        //         console.log('error in post - Something happened in setting up the request that triggered an Error')// Something happened in setting up the request that triggered an Error
-        //         console.log('Error', error.message);
-        //     }
-        // });
-
     }
 
     render(){
@@ -195,10 +154,11 @@ export default class Product extends Component{
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>{this.props.info.productName}</Card.Title>
-                            <Card.Subtitle>{this.props.info.productName}</Card.Subtitle>
+                            <Card.Subtitle>{this.props.info.productSubTitle}</Card.Subtitle>
                             <Badge pill bg="primary">Available:  {this.props.info.availableQuantity}</Badge>
+                            <Card.Text> Total:  {this.props.info.totalQuantity}</Card.Text>
                             <Card.Text>Price Per Day : {this.props.info.rentalPricePerDay}</Card.Text>
-                            <Button variant="primary" onClick={this.showModal}>Rent</Button>
+                            {this.props.info.availableQuantity > 0 && <Button variant="primary" onClick={this.showModal}>Rent</Button> }
                         </Card.Body>
                     </Card>
                 </Col>

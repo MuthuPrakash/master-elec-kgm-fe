@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Container, Navbar, NavLink  } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import axios from 'axios'
 import Input from './Input';
 import Table from './Table';
@@ -8,14 +8,7 @@ import Search from './search';
 import SheetInfoFinder from './sheetInfoFinder';
 import ColoredLine from './HorizontalLine';
 import './index.css';
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Redirect,
-  } from "react-router-dom";
-
-  
+import config from './config.json';
 
 
  export default class BookListPage extends Component {
@@ -73,7 +66,7 @@ import {
         });
 
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.post(`https://master-electricals.herokuapp.com/api/items`, bookItem, {
+        axios.post(config.apiHost + `/api/items`, bookItem, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -121,7 +114,7 @@ import {
 
     getItems = function () {
         axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-        axios.get(`https://master-electricals.herokuapp.com/api/items`, {
+        axios.get(config.apiHost + `/api/items`, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',

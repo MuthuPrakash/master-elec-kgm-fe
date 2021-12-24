@@ -4,44 +4,44 @@ import DataTable from 'react-data-table-component';
 const columns = [
     {
         name: 'Book Number',
-        selector: 'booknumber',
+        selector: (row) => row.booknumber,
         sortable: true
     },
     {
         name: 'Book Type',
-        selector: 'booktype'
+        selector: (row) => row.booktype
     },
     {
         name: 'Sheet No',
-        selector: 'bookid',
+        selector: (row) => row.bookid,
         sortable: true
     },
     {
         name: 'Computer No',
-        selector: 'sysid'
+        selector: (row) => row.sysid
     },
     {
         name: 'Is Return',
-        selector: 'isreturn'
+        selector: (row) => row.isreturn
     },
     {
         name: 'Return No',
-        selector: 'returnid'
+        selector: (row) => row.returnid
     },
     {
         name: 'Is Cancel',
-        selector: 'iscancel',
+        selector: (row) => row.iscancel,
         sortable: true
     },
     {
         name: 'Return Notes',
-        selector: 'returnnotes',
+        selector: (row) => row.returnnotes,
         width: '200px',
         wrap: true
     },
     {
         name: 'Cancel Notes',
-        selector: 'cancelnotes',
+        selector: (row) => row.cancelnotes,
         width: '200px',
         wrap: true
     }

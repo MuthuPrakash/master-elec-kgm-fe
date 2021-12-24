@@ -98,7 +98,7 @@ class Search extends Component {
                     </div>
                     <div>
                         <Container>
-                            <Row>
+                            <Row >
                                 <Form>
                                     <Form.Group className='displayNone'>
                                         <Form.Label>Book Type</Form.Label>
