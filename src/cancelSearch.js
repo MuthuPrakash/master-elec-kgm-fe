@@ -21,7 +21,7 @@ class CancelSearch extends Component {
             [fieldName]: value
         })
     }
-
+    
     onApplySearch = (e) => {
         e.preventDefault();
         let bookNumberSelected = parseInt(this.state.booknumber, 10);
