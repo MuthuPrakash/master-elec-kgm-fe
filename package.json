@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines" : { 
+    "node" : ">=8.6" 
+  },
   "devDependencies": {
     "datatables.net": "^1.10.13",
     "jquery": "^3.1.1",
