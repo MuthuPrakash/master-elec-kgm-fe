@@ -85,9 +85,9 @@ class Input extends Component {
                                         this.updateValue('booknumber', e.target.value)
                                     }} />
                                 </Form.Group>
-                                <Form.Group controlId="formBookType" className='displayNone'>
+                                <Form.Group controlId="formBookType" className={this.state.loginValidate ? 'displayBlock' : 'displayNone'}>
                                     <Form.Label>Book Type</Form.Label>
-                                    <Form.Control as="select" onChange={(e) => {
+                                    <Form.Control as="select" value={this.state.booktype} onChange={(e) => {
                                         this.updateValue('booktype', e.target.value)
                                     }}>
                                         <option value="A">A</option>
