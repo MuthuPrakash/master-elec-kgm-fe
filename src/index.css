@@ -44,7 +44,7 @@ header{
 }
 
 .displayNone {
-    display: none;
+    display: none !important;
 }
 
 .alignRight {
