@@ -24,10 +24,10 @@ import config from './config.json';
         this.getItems();
     }
 
-    validateItemExists = function (itemToValidate) {
+    validateItemExists = function (itemToValidate, typeToValidate) {
         var isItemExists = false;
         this.state.names.forEach(element => {
-            if(element.bookid === itemToValidate){
+            if(element.bookid === itemToValidate && element.booktype === typeToValidate){
                 isItemExists = true;
                 return isItemExists;
             }
@@ -37,7 +37,7 @@ import config from './config.json';
 
     onAddClick = function (id, sysid, isreturn, returnid, booktype, returnnotes, iscancel, cancelnotes) {
 
-        var isBookIdExists = this.validateItemExists(id);
+        var isBookIdExists = this.validateItemExists(id, booktype);
         if(isBookIdExists){
             alert('Sheet already exists! Contact Admin!');
             return;
@@ -66,7 +66,7 @@ import config from './config.json';
         });
 
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.post(config.apiHost + `/api/items`, bookItem, {
+        axios.post(config.apiHost + `/api/addItem`, bookItem, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ import config from './config.json';
 
             const result = this.state.names.map((nameData) => {
                 console.log('nameData.id: ', nameData.id, '=== id: ', id);
-                if (nameData.bookid === id) {
+                if (nameData.bookid === id && nameData.booktype === booktype) {
                     updated = true;
                     return bookItem;
                 }
